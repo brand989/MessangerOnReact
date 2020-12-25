@@ -1,13 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Message = (props) => {
-    const numbers = props.numbers
-    const listItems = numbers.map((number) =>
-        <li>{number}</li>
-    );
 
-    return <ul>{listItems}</ul>
+export default class Message extends React.Component {
+    
+    static propTypes = {
+        text: PropTypes.string.isRequired,
+        author: PropTypes.string.isRequired
+    }
+    
 
-};
+    componentDidUpdate() {
+      
+      
+    }
+    
 
-export default Message; 
+    render(){
+        return <div>
+            <span>{this.props.author} : </span>
+            <span>{this.props.text}</span> 
+        </div>
+    }
+}; 
