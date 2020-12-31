@@ -1,9 +1,15 @@
 import React from 'react';
 
-import Message from './Message.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 
 import MessageList from './MessageList.jsx';
+import SendMessage from './SendMessage.jsx';
+import Header from './Header.jsx';
+import ChatList from './ChatList.jsx';
 
+
+import '../style/App.css'
 
 
 
@@ -14,7 +20,7 @@ export default class App extends React.Component {
         super(props);
 
         this.state = {
-            welcomePhrase: {'author': 'Робот','text':"Hello, I'm robot"},
+            welcomePhrase: {},
             timeout: null,
             messages: [],
             interval: null,
@@ -35,40 +41,37 @@ export default class App extends React.Component {
 
     }
 
-    change = (event) => {
-        this.setState({ value: event.target.value });
-        console.log(event.target.value);
-    }
+
 
     askRobot = () => {
         this.setState({ messages: [...this.state.messages,{'author': 'Робот', 'text': 'sorry, i can\'t help you'}] });
     }
 
-    clickForForm = (event) => {
-        event.preventDefault();
-        this.setState({ messages: [...this.state.messages, {'author': 'Вы', 'text': this.state.value}] });
-        this.setState({ value: '' });
+   
+
+    send = objmessage => {
+        console.log(objmessage)
+        this.setState({ messages: [...this.state.messages,  objmessage] });
         const timeout = setTimeout(
             () => {
                 this.askRobot()
             },
-            100
+        2000
         );    
-
-    }
+    };
 
 
     render() {
-        console.log('render');
-        return <main>
-            <Message author={this.state.welcomePhrase.author} text={this.state.welcomePhrase.text} />
-            <div> <MessageList messages={this.state.messages} /></div>
-
-            <form onSubmit={this.clickForForm}>
-                <input value={this.state.value} onChange={this.change} />
-                <input type='submit' />
-            </form>
-        </main>;
+        return <MuiThemeProvider>
+                    <main className="main">
+                        <Header  />
+                        <div className="chat">
+                            <ChatList />
+                            <MessageList messages={this.state.messages} />
+                        </div>
+                        <SendMessage send={this.send}/>
+                    </main>
+                </MuiThemeProvider>
     }
-};
+}
 
