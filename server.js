@@ -12,7 +12,7 @@ app.listen(port , () => {
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
-    // fs.readFileSync('./public/index.html')
+    res.send(fs.readFileSync('./public/index.html'))
+   
 
   })
