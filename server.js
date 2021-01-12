@@ -11,8 +11,10 @@ app.listen(port , () => {
   console.log("Server started")
 })
 
+let body = fs.readFileSync('./public/index.html')
+
 app.get('/', (req, res) => {
-    res.send(fs.readFileSync('./public/index.html'))
+    res.send(body)
    
 
   })
