@@ -11,10 +11,23 @@ app.listen(port , () => {
   console.log("Server started")
 })
 
-let body = fs.readFileSync('./dist/index.html')
 
-app.get('/', (req, res) => {
+let body
+  
+try {
+   body = fs.readFileSync(`./dist${req.url}`)
+} catch (err) {
+     body = fs.readFileSync('./dist/index.html')
+}
+
+app.get(':url', (req, res) => {
+    let body
+  
+    try {
+       body = fs.readFileSync(`./dist/${url}`)
+    } catch (err) {
+         body = fs.readFileSync('./dist/index.html')
+    }
+
     res.send(body)
-   
-
   })
