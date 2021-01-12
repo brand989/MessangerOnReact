@@ -10,3 +10,9 @@ app.use(bodyParser.json())
 app.listen(port , () => {
   console.log("Server started")
 })
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+    // fs.readFileSync('./public/index.html')
+
+  })
