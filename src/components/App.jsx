@@ -28,7 +28,7 @@ export default class App extends React.Component {
             timeout: null,
             interval: null,
             value: '',
-            chatList: [1,2,3,4]
+            chatList: [1,2,3]
                 
             
         }
