@@ -12,22 +12,14 @@ app.listen(port , () => {
 })
 
 
-let body
-  
-try {
-   body = fs.readFileSync(`./dist${req.url}`)
-} catch (err) {
-     body = fs.readFileSync('./dist/index.html')
-}
+app.get('/', (req, res) => {
+    let body = fs.readFileSync('./dist/index.html')
 
-app.get(':url', (req, res) => {
-    let body
-  
-    try {
-       body = fs.readFileSync(`./dist/${url}`)
-    } catch (err) {
-         body = fs.readFileSync('./dist/index.html')
-    }
+    res.send(body)
+  })
 
+  app.get('/index.bundle.js', (req, res) => {
+    let body = fs.readFileSync('./dist/index.bundle.js')
+    
     res.send(body)
   })
