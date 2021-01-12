@@ -1,16 +1,25 @@
-const express = require('express')
-const fs = require('fs') 
-const app = express()
-const bodyParser = require('body-parser')
-let port = process.env.PORT || 2000
-const path = require('path');
-const cool = require('cool-ascii-faces');
 
 
-express()
-    .use(express.static(path.join(__dirname, './dist')))
-    .get('/', (req, res) => res.render('./dist/index.html'))
-    .get('/cool', (req, res) => res.send(cool()))
-    .listen(port , () => {
-        console.log("Server started")
-      })
+
+const http = require('http')
+const fs = require('fs')
+const server = http.createServer((req, res) => {
+      
+console.log(req.url)
+      
+let body
+        
+try {
+    body = fs.readFileSync(`./dist${req.url}`)
+} catch (err) {
+    body = fs.readFileSync('./dist/index.html')
+}
+      
+        
+res.end(body)
+      
+})
+      
+server.listen(process.env.PORT || 2000)
+      // Выводим в консоль, что сервер стартовал
+console.log('Server started')
