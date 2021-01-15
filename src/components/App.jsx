@@ -1,19 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
-import {FlatButton} from 'material-ui';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {Provider} from 'react-redux';
 
 
-// import MessageList from './MessageList.jsx';
-// import SendMessage from './SendMessage.jsx';
-// import Header from './Header.jsx';
-// import ChatList from './ChatList.jsx';
 
-import Messages from './pages/Messages'
-import Profile from './pages/Profile'
+import Router from './Router';
+import initStore from '../store';
 
-import '../style/App.css'
+
+
+import '../style/App.css';
 
 
 
@@ -64,7 +60,6 @@ export default class App extends React.Component {
     askRobot = () => {
         this.setState({ messages: [...this.state.messages,{'author': 'Робот', 'text': 'sorry, i can\'t help you'}] });
     }
-
    
 
     send = objmessage => {
@@ -78,31 +73,20 @@ export default class App extends React.Component {
     }
 
     render() {
-        return <MuiThemeProvider>
-                    <main className="main">
-                        <BrowserRouter>
-                            {/* <Header  />
-                            <div className="chat">
-                                <ChatList />
-                                <MessageList messages={this.state.messages} />
-                            </div>
-                            <SendMessage send={this.send}/> */}
-                            <nav>
-                                {this.state.chatList.map( (value,id) => <Link to={`/chat/${value}`}>Чат {value} </Link> )}
-                                <Link to="/profile">profile</Link>
-                                <FlatButton variant="contained" onClick={this.addChat}>add Chat</FlatButton>
-                            </nav>
-                            <Switch>
-                                <Route exact path="/" component={Messages}/>
-                                <Route exact path="/profile" component={Profile}/>
-                                <Route path="/chat/:chatId" render={ obj => <Messages chatId={obj.match.params.chatId}/>}/>
-                                {/* <Route path="/chat/2">
-                                    <Messages chatId={2} />
-                                </Route> */}
-                            </Switch>
-                        </BrowserRouter>
+        return       <main className="main">
+                        <Provider store={initStore()}>
+                            <BrowserRouter>
+                                
+                                <nav className="chat-switch">
+                                    {this.state.chatList.map( (value,id) => <Link to={`/chat/${value}`} className="chat-switch-chatlist">Чат {value} </Link>  )}
+                                    <Link to="/profile" variant="body2"  className="chat-switch-chatlist">Профиль</Link>
+                                    {/* <FlatButton variant="contained" onClick={this.addChat}>add Chat</FlatButton> */}
+                                </nav>
+                                <Router />
+                            </BrowserRouter>
+                        </Provider>
                     </main>
-                </MuiThemeProvider>
+                
     }
 }
 

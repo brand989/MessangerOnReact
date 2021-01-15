@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {FlatButton} from 'material-ui';
-import {TextField} from 'material-ui';
-// import Button from 'material-ui/core/Button'
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
+import '../style/SendMessage.css';
 
 export default class SendMessage extends React.Component {
 
@@ -28,14 +28,14 @@ export default class SendMessage extends React.Component {
 
     handleKeyUp = (event) => {
         if (event.keyCode === 13) { // Enter
-            this.props.send({'text': this.state.message, 'author': 'me', 'chatId': this.props.chatId });
+            this.props.send({'message': this.state.message, 'author': 'me' });
             this.setState({message:''})
         }
     };
  
 
     send = () => {
-        this.props.send({'text': this.state.message, 'author': 'me', 'chatId': this.props.chatId });
+        this.props.send({'message': this.state.message, 'author': 'me' });
         this.setState({message:''})
         
     };
@@ -47,7 +47,7 @@ export default class SendMessage extends React.Component {
   
 
     render(){
-        return <div>
+        return <div className={'sendmessage'}>
             <TextField 
                 ref={ this.textInput }
                 value={this.state.message}  
@@ -56,7 +56,7 @@ export default class SendMessage extends React.Component {
                 multiLine={true}
                 onKeyUp={ (event) => this.handleKeyUp(event)}
                 />
-            <FlatButton variant="contained" onClick={this.send}>Send</FlatButton>
+            <Button variant="contained" onClick={this.send} className={'button-sendmessage'}>Send</Button>
         </div>
     }   
 }

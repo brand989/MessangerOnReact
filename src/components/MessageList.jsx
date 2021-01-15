@@ -10,10 +10,7 @@ export default class MessageList extends React.Component {
     
     static propTypes = {
         messages: PropTypes.array,
-        chatId: PropTypes.number,
-        // messagesList:  PropTypes.Object,
-        // chatList: PropTypes.Object,
-        // idmessage: PropTypes.number
+ 
     }
     
 
@@ -30,7 +27,7 @@ export default class MessageList extends React.Component {
 
     render(){
         return <div className={'messages'}>
-            {this.props.messages.filter(message => `${message.chatId}` === `${this.props.chatId}` ).map( (value, id) => <><Message text={value.text} author={value.author} key={`message_${id}`}/><br/></> )}
+            {this.props.messages.map( (value, id) => <><Message text={value.message} author={value.author} key={`message_${id}`}/><br/></> )}
         </div>
     }
 }; 
