@@ -1,11 +1,11 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import {Provider} from 'react-redux';
-
+import {ConnectedRouter} from 'connected-react-router'
 
 
 import Router from './Router';
-import initStore from '../store';
+import initStore, {history} from '../store';
 
 
 
@@ -75,15 +75,14 @@ export default class App extends React.Component {
     render() {
         return       <main className="main">
                         <Provider store={initStore()}>
-                            <BrowserRouter>
-                                
+                            <ConnectedRouter history={history}>
                                 <nav className="chat-switch">
                                     {this.state.chatList.map( (value,id) => <Link to={`/chat/${value}`} className="chat-switch-chatlist">Чат {value} </Link>  )}
                                     <Link to="/profile" variant="body2"  className="chat-switch-chatlist">Профиль</Link>
                                     {/* <FlatButton variant="contained" onClick={this.addChat}>add Chat</FlatButton> */}
                                 </nav>
                                 <Router />
-                            </BrowserRouter>
+                            </ConnectedRouter>
                         </Provider>
                     </main>
                 

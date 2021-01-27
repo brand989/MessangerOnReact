@@ -30,6 +30,18 @@ class Messages extends React.Component {
 
     };
 
+    componentDidUpdate(prevProps, prevState){
+
+        if(prevProps.messagesStore.length < this.props.messagesStore.length &&
+            this.props.messagesStore[this.props.messagesStore.length - 1].author === 'me'){
+                setTimeout(
+                    () => this.send({'message': 'sorry, i can\'t help you' , 'author': 'Робот' }),
+                    1000
+                );
+
+        }
+    };
+
     render() {
         return <>
             <h2> Аккаунт {this.props.profileStore.name}:  {this.props.chatsStore[this.props.chatId].name}</h2>
