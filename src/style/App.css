@@ -1,0 +1,45 @@
+main {
+    height: 100%;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+main h2 {
+    position: absolute;
+    top: -50px;
+}
+
+.chat {
+    width: 100%;
+}
+
+.chat-switch{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    
+
+}
+
+.chat-switch-chatlist {
+    display: inline-block;
+    background-color: #e2e2e2;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    text-decoration: none;
+   
+}
+
+.chat-switch-chatlist:hover{
+    background-color: #b9b5b5;
+}
+
+.profile{
+    min-width: 70%;
+    padding: 30px;
+}
