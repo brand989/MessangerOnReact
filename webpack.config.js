@@ -60,7 +60,7 @@ module.exports = {
    devServer: {
        contentBase: './dist'
    },
-     module: {
+     module: { 
          rules: [
              {
                test: /\.jsx?$/,
@@ -69,7 +69,7 @@ module.exports = {
                loader: 'babel-loader',
                options: {
                    presets: ['@babel/env', '@babel/react'],
-                   plugins: ['@babel/plugin-proposal-class-properties']
+                   plugins: ['@babel/plugin-proposal-class-properties','@babel/plugin-transform-async-to-generator','@babel/plugin-transform-runtime']
                }
              },
              {

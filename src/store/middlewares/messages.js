@@ -6,7 +6,8 @@ export default store => next => action => {
 
     switch(action.type){
         case SEND_MESSAGE:
-            if(action.author === 'me'){
+            if(action.author === 'me' &&
+            action.newMesId > 8 ){
                 console.log('need send')
 
                 setTimeout(

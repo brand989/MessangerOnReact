@@ -23,24 +23,46 @@ class Messages extends React.Component {
 
     send = objmessage => {
         const newMesId = this.props.messagesStore.length;
-
-    
-        this.props.sendMessage(objmessage.message, objmessage.author, this.props.chatId);
+        this.props.sendMessage(objmessage.message, objmessage.author, this.props.chatId, newMesId);
         this.props.sendChat(this.props.chatId, `Chat ${this.props.chatId}`, newMesId )
 
     };
 
+
+    sendMessageForApi(chatId, chatName, messages){
+
+        messages.map(value => {
+            this.props.sendMessage(value.message, value.author, chatId);
+            this.props.sendChat(chatId, chatName, value.Id )
+        })
+
+
+    }
+
     componentDidUpdate(prevProps, prevState){
 
-        if(prevProps.messagesStore.length < this.props.messagesStore.length &&
-            this.props.messagesStore[this.props.messagesStore.length - 1].author === 'me'){
-                setTimeout(
-                    () => this.send({'message': 'sorry, i can\'t help you' , 'author': 'Робот' }),
-                    1000
-                );
+        // if(prevProps.messagesStore.length < this.props.messagesStore.length &&
+        //     this.props.messagesStore[this.props.messagesStore.length - 1].author === 'me' &&
+        //     prevProps.messagesStore.length > 10){
+        //         setTimeout(
+        //             () => this.send({'message': 'sorry, i can\'t help you' , 'author': 'Робот' }),
+        //             1000
+        //         );
 
-        }
+        // }
     };
+
+    componentDidMount(){
+        fetch('/api/chats.json')
+        .then(response => response.json())
+        .then(response => {
+            Object.entries(response).map( value => {
+                this.sendMessageForApi(value[0], value[1].name, value[1].messages)
+            })
+        })
+        .catch(err => console.log('err', err))
+
+    }
 
     render() {
         return <>

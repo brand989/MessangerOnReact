@@ -1,0 +1,34 @@
+{
+    "1": {
+        "name": "Chat 1",
+        "messages": [
+            { "message": "test0", "author": "me", "id": "0" },
+            { "message": "test1", "author": "me", "id": "1" }
+            
+            
+            
+        ]
+    },
+    "2": {
+        "name": "Chat 2",
+        "messages": [
+            { "message": "test3", "author": "me", "id": "2" },
+            { "message": "test2", "author": "me", "id": "3" }
+        ]
+    },
+    "3": {
+        "name": "Chat 3",
+        "messages": [
+            { "message": "test4", "author": "me", "id": "4" },
+            { "message": "test5", "author": "me", "id": "5" }
+        ]
+    },
+    "4": {
+        "name": "Chat 4",
+        "messages": [
+            { "message": "test6", "author": "me", "id": "6" },
+            { "message": "test7", "author": "me", "id": "7" },
+            { "message": "test8", "author": "me", "id": "8" }
+        ]
+    }
+}
